@@ -1,0 +1,26 @@
+
+<div style="height: 100vh; background:yellowgreen; color:white" class="  d-flex flex-column justify-content-center align-items-center">
+    <h2 class="text-dark fw-bolder pb-2">EMPLOYEE LOGIN PAGE</h2>
+    <form [formGroup]="EmployeeLoginForm" style="padding: 2rem 5rem;" class="shadow bg-dark rounded" >
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">User Name</label>
+        <input name="username" type="text" formControlName="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        @if(EmployeeLoginForm.get('username')?.touched && EmployeeLoginForm.get('username')?.errors)
+        {
+            <div class="text-danger fw-bolder">Invalid Username</div>
+          }
+      </div>
+      
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input formControlName="password" name="password" type="password" class="form-control" id="exampleInputPassword1">
+        @if(EmployeeLoginForm.get('password')?.touched && EmployeeLoginForm.get('password')?.errors)
+
+        {
+            <div class="text-danger fw-bolder">Invalid password</div>
+          }
+      </div>
+     
+      <button [disabled]="EmployeeLoginForm.invalid" routerLink="employees" type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>

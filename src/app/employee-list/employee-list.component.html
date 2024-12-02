@@ -1,0 +1,89 @@
+<div style="background-color: yellowGreen; height:100vh;">
+    <div  class="d-flex pt-5 flex-column justify-content-center align-items-center">
+        <h1 class="text-dark">Employee Details</h1>
+        <div>
+           <div class="my-3">
+                <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Add Employee
+                  </button>
+                  
+           </div>
+          <div>
+                <table class="table shadow text-center ">
+                    <thead>
+                        <tr class="">
+                            <th class="px-5">Name</th>
+                            <th  class="px-5">Contact No</th>
+                            <th  class="px-5">Email</th>
+                            <th  class="px-5">Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (emp of employeeList; track $index)
+                        {<tr>
+                            <td>{{emp.empname}}</td>
+                            <td>{{emp.contactno}}</td>
+                            <td>{{emp.email}}</td>
+                            <td>{{emp.address}}</td>
+                        </tr>}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstarp Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">ADD EMPLOYEE PAGE</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="EmployeeForm">
+                <div class="mb-3">
+                    <label for="exampleInputename" class="form-label">Employee Name</label>
+                    <input name="empname" formControlName="empname" type="text" class="form-control" id="exampleInputename">
+                   @if(EmployeeForm.get('empname')?.touched && EmployeeForm.get('ename')?.errors)
+                    {<div class="text-danger fw-bolder">Invalid Name</div>}
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputcontact" class="form-label">Contact Number</label>
+                    <input name="contactno" formControlName="contactno" type="text" class="form-control"
+                        id="exampleInputcontactno">
+                        @if(EmployeeForm.get('contactno')?.touched && EmployeeForm.get('contactno')?.errors)
+
+{                    <div class="text-danger fw-bolder">Invalid Contact Number</div>
+}                    
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputemail" class="form-label">Email</label>
+                    <input name="email" formControlName="email" type="email" class="form-control"
+                        id="exampleInputemail">
+                        @if(EmployeeForm.get('email')?.touched && EmployeeForm.get('email')?.errors)
+
+                    {<div class="text-danger fw-bolder">Invalid Email</div>}
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputeaddress" class="form-label">Address</label>
+                    <input name="address" formControlName="address" type="text" class="form-control"
+                        id="exampleInputaddress" aria-describedby="emailHelp">
+                        @if(EmployeeForm.get('address')?.touched && EmployeeForm.get('address')?.errors)
+
+                    {<div class="text-danger fw-bolder">Invalid Address</div>}
+                    
+                </div>
+                <button (click)="addEmployee()" [disabled]="EmployeeForm.invalid" type="button" class="btn btn-success" data-bs-dismiss="modal">Submit</button>
+            </form>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
